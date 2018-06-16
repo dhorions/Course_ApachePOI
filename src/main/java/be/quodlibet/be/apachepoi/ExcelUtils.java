@@ -144,7 +144,9 @@ public class ExcelUtils
     public static void formatAsStringTable(Sheet sheet, int startRow, int startColumn, String tStyle, String tName, List<String> headers, List<List<String>> values)
     {
         //Create a region in the sheet that will contain the table
-        AreaReference region = new AreaReference(new CellReference(startRow , startColumn), new CellReference(startRow + values.size(), startColumn + headers.size() - 1));
+        AreaReference region = new AreaReference(
+                new CellReference(startRow, startColumn),
+                new CellReference(startRow + values.size(), startColumn + headers.size() - 1));
         //Create a XSSF table
         XSSFTable table = ((XSSFSheet) sheet).createTable();
         //Get a reference to the CT Table so we can access the predefined table formats
@@ -158,6 +160,8 @@ public class ExcelUtils
         tableStyle.setShowRowStripes(true);
         //Set the reference of the Style to the region we defined.  The reference should be a string representation of the region
         cttable.setRef(region.formatAsString());
+        //Set the auto filter reference if we want auto filtering added to the columns
+        cttable.addNewAutoFilter().setRef(region.formatAsString());
         //Set unique id's for the table, a table name can't contain spaces
         tName = tName.replace(" ", "_").toUpperCase();
         cttable.setDisplayName(tName);
@@ -170,6 +174,8 @@ public class ExcelUtils
         columns.setCount(headers.size()); //define number of columns
         int colIndex = startColumn;
         //Add the data to the sheet
+
+        //Create the header row
         XSSFRow headerRow = ((XSSFSheet) sheet).createRow(startRow);
         for (String header : headers) {
             XSSFCell localXSSFCell = headerRow.createCell(colIndex);
@@ -203,6 +209,7 @@ public class ExcelUtils
         tableStyle.setShowColumnStripes(false);
         tableStyle.setShowRowStripes(true);
         cttable.setRef(region.formatAsString());
+        cttable.addNewAutoFilter().setRef(region.formatAsString());
         tName = tName.replace(" ", "_").toUpperCase();
         cttable.setDisplayName(tName);
         cttable.setName(tName);

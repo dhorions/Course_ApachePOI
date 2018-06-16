@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Dries Horions <dries@quodlibet.be>
  */
-public class Lecture12_ConditionalFormatting
+public class Lecture13_ConditionalFormatting
 {
     public static void main(String[] args) throws ParseException
     {

@@ -26,7 +26,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDataFields;
  *
  * @author Dries Horions <dries@quodlibet.be>
  */
-public class Lecture13_PivotTables
+public class Lecture14_PivotTables
 {
     public static void main(String[] args) throws ParseException
     {

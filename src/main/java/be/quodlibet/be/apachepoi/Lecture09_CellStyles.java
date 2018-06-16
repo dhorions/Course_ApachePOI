@@ -83,7 +83,7 @@ public class Lecture09_CellStyles
             //AWT color takes RED, GREEN, BLUE values
 
             XSSFColor customColor = new XSSFColor(new java.awt.Color(200, 10, 20));
-            headerCellStyle.setLeftBorderColor(customColor);
+            //headerCellStyle.setLeftBorderColor(customColor);
             headerCellStyle.setRightBorderColor(customColor);
             headerCellStyle.setBottomBorderColor(customColor);
             /**
@@ -101,7 +101,7 @@ public class Lecture09_CellStyles
             headerFont.setFontHeightInPoints((short) 12);
             headerFont.setBold(true);
             headerFont.setFontName("Arial");
-            headerFont.setColor(IndexedColors.BLACK.getIndex());
+            headerFont.setColor(IndexedColors.DARK_BLUE.getIndex());
             //Assign the font to the style
             headerCellStyle.setFont(headerFont);
             /**
