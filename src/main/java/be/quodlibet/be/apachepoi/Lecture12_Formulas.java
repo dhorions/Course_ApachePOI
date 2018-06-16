@@ -28,7 +28,7 @@ public class Lecture12_Formulas
         //You can use any existing folder
         String excellFolder = "D:\\Udemy\\Projects\\ApachePOICourse\\resources\\";
         //Create an output stream to write the file
-        String filePath = excellFolder + "lecture11.xlsx";
+        String filePath = excellFolder + "lecture12.xlsx";
         try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
             //Create a workbook
             XSSFWorkbook wb = new XSSFWorkbook();
@@ -40,7 +40,6 @@ public class Lecture12_Formulas
              * types of objects instead of just strings
              */
             //Create a List of column headers
-
             List<String> headers = Arrays.asList("Start Date", "Start Time", "End Date", "End Time",
                                                  "Location", "Distance", "Duration", "Average Speed");
             /**
@@ -49,7 +48,6 @@ public class Lecture12_Formulas
             List<List<Object>> data = new ArrayList();
             //Create a formatter to easily add dates and times
             SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-
             /**
              * For the duration column, we'll use a formula to calculate the duration between start and finish
              * Since we don't really know yet what row this will end up in in the spreadsheet, we'll use a formula that references the
@@ -65,7 +63,7 @@ public class Lecture12_Formulas
             String durationFormula = "=INDIRECT(\"C\"&ROW())-INDIRECT(\"B\"&ROW())";
             /**
              * The speed will be calculated as km/h
-             * Excell times are always in 86400th of a second
+             * Excell times are always in 86400th of a day
              * 1 second = 1/86400 = 0.0000115740740740741
              * 1 minute = 60/86400 = 0.000694444444444444
              * 1 hour = 3600/86400 = 0.0416666666666667
@@ -117,8 +115,11 @@ public class Lecture12_Formulas
             columnStyles.put(7, speedStyle);//Speed
 
             //Create the table
-            ExcelUtils.formatAsTable(sheet, 5, 0, "TableStyleDark2", "RunningResults", headers, data, columnStyles);
-
+            ExcelUtils.formatAsTable(sheet, 0, 0, "TableStyleDark2", "RunningResults", headers, data, columnStyles);
+            //Size the columns
+            for (int i = 0; i < 8; i++) {
+                ExcelUtils.setColSize(sheet, i, 12);
+            }
             //Save the workbook to the filesystem
             wb.write(fileOut);
             System.out.println("Saved Excell file to  : " + filePath);
