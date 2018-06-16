@@ -6,22 +6,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
-=======
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import org.apache.poi.ss.usermodel.BuiltinFormats;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Row;
->>>>>>> a44a04442b694f854a6fd249186961c393d9543a
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -29,11 +18,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Dries Horions <dries@quodlibet.be>
  */
-<<<<<<< HEAD
+
 public class Lecture12_Formulas
-=======
-public class Lecture11_DataFormatting
->>>>>>> a44a04442b694f854a6fd249186961c393d9543a
+
 {
     public static void main(String[] args) throws ParseException
     {
@@ -47,63 +34,15 @@ public class Lecture11_DataFormatting
             XSSFWorkbook wb = new XSSFWorkbook();
             //Create a sheet (the name can't contain ":")
             Sheet sheet = wb.createSheet("First Sheet");
-<<<<<<< HEAD
             /**
              * We will create a method similar to the formatAsStringTable from previous lecture,
-=======
-
-            /**
-             * Data formats can be assigned to cells just as they are in excell
-             * You can find the notation by using the Custom Number format in the excel format dialog
-             * Apache POI also offers some builtin formats, you can find these at : https://poi.apache.org/apidocs/org/apache/poi/ss/usermodel/BuiltinFormats.html
-             */
-            //Create a cell style with a predefined date format
-            //assign a built in date format to this cell
-            CellStyle dateStyle = sheet.getWorkbook().createCellStyle();
-            dateStyle.setDataFormat((short) BuiltinFormats.getBuiltinFormat("m/d/yy"));
-
-            //Create a custom data format, the CreateHelper class helps creating various things, among these things is a dataformat
-            CellStyle pctStyle = sheet.getWorkbook().createCellStyle();
-            CreationHelper createHelper = sheet.getWorkbook().getCreationHelper();
-            //We'll create a format for a percentage with 2 digit precision
-            pctStyle.setDataFormat(createHelper.createDataFormat().getFormat("0.00%"));
-
-            //Create a custom format that displays the numeric value with a specific prefix,
-            //as an example, we wan't to put 000x in front of the cell value
-            // 11111 would be displayed as 000x11111
-            // 12345 as 000x12345
-            CellStyle zeroxStyle = sheet.getWorkbook().createCellStyle();
-            zeroxStyle.setDataFormat(createHelper.createDataFormat().getFormat("000x######"));
-
-            //Create a row, the first row will have index 0
-            Row r = sheet.createRow(0);
-            //Create a cell that contains a date
-            Cell c = r.createCell(0);
-            c.setCellValue(new Date());
-            //Assign the date style
-            c.setCellStyle(dateStyle);
-            //Create a cell that contains a percentage
-            c = r.createCell(1);
-            c.setCellValue(0.2525);//25.25%
-            c.setCellStyle(pctStyle);
-            //Create a cell that contains a value formatted as 000x######
-            c = r.createCell(2);
-            c.setCellValue(99999);//000x99999
-            c.setCellStyle(zeroxStyle);
-
-            /**
-             * Now we'll create a method similar to the formatAsStringTable from previous lecture,
->>>>>>> a44a04442b694f854a6fd249186961c393d9543a
              * but we will add the ability to add a specific format to each column, and allow different
              * types of objects instead of just strings
              */
             //Create a List of column headers
-<<<<<<< HEAD
+
             List<String> headers = Arrays.asList("Start Date", "Start Time", "End Date", "End Time",
                                                  "Location", "Distance", "Duration", "Average Speed");
-=======
-            List<String> headers = Arrays.asList("Start Date", "Start Time", "End Date", "End Time", "Location", "Distance", "Duration", "Average Speed");
->>>>>>> a44a04442b694f854a6fd249186961c393d9543a
             /**
              * The last two columns, duration and speed, we'll let excell calculate using a formula
              */
@@ -151,7 +90,7 @@ public class Lecture11_DataFormatting
 
             //Create a map of styles, they are mapped to the columns by their index
             HashMap<Integer, CellStyle> columnStyles = new HashMap();
-<<<<<<< HEAD
+
             //Style for date
             //Create a cell style with a predefined date format
             //assign a built in date format to this cell
@@ -161,12 +100,6 @@ public class Lecture11_DataFormatting
             columnStyles.put(2, dateStyle);//End Date
             //Time Style
             CreationHelper createHelper = sheet.getWorkbook().getCreationHelper();
-=======
-            //Style for date, reuse the style we used before
-            columnStyles.put(0, dateStyle);//Start Date
-            columnStyles.put(2, dateStyle);//End Date
-            //Time Style
->>>>>>> a44a04442b694f854a6fd249186961c393d9543a
             CellStyle timeStyle = sheet.getWorkbook().createCellStyle();
             timeStyle.setDataFormat(createHelper.createDataFormat().getFormat("hh:mm:ss"));
             columnStyles.put(1, timeStyle);//Start Time
@@ -186,10 +119,6 @@ public class Lecture11_DataFormatting
             //Create the table
             ExcelUtils.formatAsTable(sheet, 5, 0, "TableStyleDark2", "RunningResults", headers, data, columnStyles);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a44a04442b694f854a6fd249186961c393d9543a
             //Save the workbook to the filesystem
             wb.write(fileOut);
             System.out.println("Saved Excell file to  : " + filePath);
