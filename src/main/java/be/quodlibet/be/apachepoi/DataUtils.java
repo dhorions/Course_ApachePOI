@@ -29,6 +29,8 @@ public class DataUtils
      * Return a list of data records that can be used in our samples
      *
      * @param nr
+     * @param durationFormula
+     * @param speedFormula
      * @return
      */
     public static List<List<Object>> getRandomRunningResults(int nr, String durationFormula, String speedFormula)
